@@ -1,0 +1,9 @@
+led:
+  count: 90
+  count_per_meter: 60
+  pin: 18  # GPIO pin connected to the pixels (18 uses PWM!).
+  freq_hz: 800000  # LED signal frequency in hertz (usually 800khz)
+  dma: 0  # DMA channel to use for generating signal (try 10)
+  brightness: 255  # Set to 0 for darkest and 255 for brightest
+  invert: False  # True to invert the signal (when using NPN transistor level shift)
+  channel: 0
