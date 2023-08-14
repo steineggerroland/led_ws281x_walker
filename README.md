@@ -4,6 +4,21 @@
 
 ### Required python libs
 
+* [rpi-ws281x](https://github.com/rpi-ws281x/rpi-ws281x-python)
+* [pyyaml](https://github.com/yaml/pyyaml)
+
+#### Install rpi-ws281x requirements
+
+_*gcc* and *python3-dev* need to be installed which can be achieved on debian based systems with the following instructions:_
+
+```
+sudo apt install gcc python3-dev
+```
+
+#### Install python libs using [pip](https://pypi.org/project/pip/)
+
+_Please refer to [pip documentation for installation instructions](https://pip.pypa.io/en/stable/installation/)._
+
 ```
 pip install rpi-ws281x
 pip install pyyaml
@@ -11,7 +26,7 @@ pip install pyyaml
 
 ## Configuration
 
-You can offer a YAML configuration file in the following format:
+You can offer a [YAML configuration file](https://yaml.org/) in the following format:
 
 ```YAML
 led:
