@@ -1,0 +1,12 @@
+[Unit]
+Description=LED strip runner
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+WorkingDirectory=/home/pi/led_ws281x_walker
+ExecStart=/usr/bin/python3 led_strip_runner.py
+
+[Install]
+WantedBy=multi-user.target

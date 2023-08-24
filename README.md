@@ -24,6 +24,18 @@ pip install rpi-ws281x
 pip install pyyaml
 ```
 
+### System.d service
+
+You can setup a simple system.d service, to make sure the runner or one of the generators are up. Service files for these scripts exist and can be installed with the following commands.
+
+
+```
+sudo ln -s /<path to script>/<service file, e.g. led_strip_runner.service> /lib/systemd/system/<service file>
+sudo systemctl daemon-reload
+sudo systemctl enable <service file>
+sudo systemctl start <service file>
+```
+
 ## Configuration
 
 You can offer a [YAML configuration file](https://yaml.org/) in the following format:

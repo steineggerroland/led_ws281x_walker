@@ -1,5 +1,6 @@
 import argparse
 import uuid
+from curses import wrapper
 from os import mkdir, path
 from random import gauss
 from threading import Thread
@@ -30,21 +31,31 @@ if not path.exists(monster_dir):
     mkdir(monster_dir)
 
 
-def draw_new_monsters():
+def draw_new_monsters(screen):
     while True:
         # spawn monster at certain chance
         seconds_until_spawn = int(gauss(mean_seconds_to_spawn, mean_seconds_to_spawn * 0.666))
         while seconds_until_spawn > 0:
+            screen.addstr(0, 0, f"Next monster in {seconds_until_spawn} seconds     ")
+            screen.refresh()
             seconds_until_spawn -= 1
             sleep(1)
+        screen.move(1, 0)
+        screen.insertln()
         monster = random_monster(warm_colors, slow_movement, dimmed)
+        screen.addstr(monster.description)
         with open(f"{monster_dir}/monster-{uuid.uuid4()}.json", 'w') as f:
             f.write(monster.json_sequence())
+        screen.refresh()
 
 
-monster_draw_thread = Thread(target=draw_new_monsters)
-try:
-    monster_draw_thread.start()
-except KeyboardInterrupt:
-    if monster_draw_thread.isAlive():
-        monster_draw_thread.join()
+def main(screen):
+    monster_draw_thread = Thread(target=draw_new_monsters, args=(screen,))
+    try:
+        monster_draw_thread.start()
+    except KeyboardInterrupt:
+        if monster_draw_thread.isAlive():
+            monster_draw_thread.join()
+
+
+wrapper(main)
